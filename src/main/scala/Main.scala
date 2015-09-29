@@ -10,12 +10,13 @@ import org.openqa.selenium.support.ui._
 object Main {
   def main(args: Array[String]) {
 
+    val target = "17:20"
 
     val driver = new FirefoxDriver()
     driver.get("http://www.google.co.jp/")
 
     driver.get("https://hlo.tohotheater.jp/net/schedule/032/TNPI2000J01.do")
-    while(System.currentTimeMillis() <= 1443535489000L/*1443538800000L*/){
+    while(System.currentTimeMillis() <= 1443538800000L){
       println("まだ")
       println((new Date()).toString)
       Thread.sleep(500)
@@ -23,15 +24,15 @@ object Main {
     // driver.findElement(By.cssSelector(".sun>.item>.schedule_list_1-date")).click()
     // driver.findElement(By.cssSelector(".sun_active")).click()
     // driver.findElements()
-    driver.findElements(By.cssSelector(".schedule_list_1-date")).filter(_.getText.contains("9/30")).foreach(_.click())
+    driver.findElements(By.cssSelector(".schedule_list_1-date")).filter(_.getText.contains("10/4")).foreach(_.click())
 
     val wait = new WebDriverWait(driver, 15);
     wait.until(new ExpectedCondition[Boolean]() {
       override def apply(d: WebDriver): Boolean = {
-        d.findElements(By.xpath("//span[@class=\"schedule_table_3-date\"]/em[text()=\"13:50\"]"))
+        d.findElements(By.xpath("//span[@class=\"schedule_table_3-date\"]/em[text()=\"" + target + "\"]"))
           .find(e => {
             try {
-              val res = e.getText.contains("13:50")
+              val res = e.getText.contains(target)
               println(res)
               res
             } catch {case _ => false}
