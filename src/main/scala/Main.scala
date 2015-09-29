@@ -19,7 +19,7 @@ object Main {
     while(System.currentTimeMillis() <= 1443538800000L){
       println("まだ")
       println((new Date()).toString)
-      Thread.sleep(500)
+      Thread.sleep(333)
     }
     // driver.findElement(By.cssSelector(".sun>.item>.schedule_list_1-date")).click()
     // driver.findElement(By.cssSelector(".sun_active")).click()
