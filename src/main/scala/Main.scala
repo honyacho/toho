@@ -9,7 +9,7 @@ import java.util.Date
 import scala.collection.JavaConversions._
 
 object Main {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 
     val target = "17:20"
     val driver = new FirefoxDriver()
@@ -34,7 +34,7 @@ object Main {
               val res = e.getText.contains(target)
               println(res)
               res
-            } catch { case _ => false }
+            } catch { case _: Throwable => false }
           })
           .find(e => {
             try {
@@ -42,7 +42,7 @@ object Main {
               println("after: " + elem.nonEmpty)
               elem.foreach(_.click())
               elem.nonEmpty
-            } catch { case _ => false }
+            } catch { case _: Throwable => false }
           }).nonEmpty
       }
     })
@@ -55,9 +55,9 @@ object Main {
     driver.findElement(By.cssSelector("#B-18")).click()
     driver.findElement(By.cssSelector("#bo-navi2>a")).click()
 
-    println("Type \"close\" if you want to close browser.")
-    while (readLine() != "close") {
-      println("Type \"close\" if you want to close browser.")
+    println("Press ctrl + d to Exit.")
+    val reader = new java.io.InputStreamReader(System.in);
+    while (reader.read() != 4) {
     }
 
     driver.quit()

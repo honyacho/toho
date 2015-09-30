@@ -15,4 +15,4 @@ class MainSpec extends Specification {
       "Hello world" must endWith("world")
     }
   }
-} 
+}
