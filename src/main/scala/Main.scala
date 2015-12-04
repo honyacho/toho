@@ -11,19 +11,20 @@ import scala.collection.JavaConversions._
 object Main {
   def main(args: Array[String]): Unit = {
 
-    val target = "17:20"
+    val target = "15:30"
+    val targetDay = "12/11"
     val driver = new FirefoxDriver()
 
-    driver.get("https://hlo.tohotheater.jp/net/schedule/032/TNPI2000J01.do")
+    driver.get("http://hlo.tohotheater.jp/net/schedule/076/TNPI2000J01.do")
 
     // starts on 9/30 0:00
-    while (System.currentTimeMillis() <= 1443538800000L) {
-      println("まだ")
-      println((new Date()).toString)
-      Thread.sleep(333)
-    }
+    // while (System.currentTimeMillis() <= 1449241200000L) {
+    //   println("まだ")
+    //   println((new Date()).toString)
+    //   Thread.sleep(100)
+    // }
 
-    driver.findElements(By.cssSelector(".schedule_list_1-date")).filter(_.getText.contains("10/4")).foreach(_.click())
+    driver.findElements(By.cssSelector(".schedule_list_1-date")).filter(_.getText.contains(targetDay)).foreach(_.click())
 
     val wait = new WebDriverWait(driver, 15);
     wait.until(new ExpectedCondition[Boolean]() {
@@ -47,12 +48,7 @@ object Main {
       }
     })
 
-    driver.findElement(By.cssSelector("#B-13")).click()
-    driver.findElement(By.cssSelector("#B-14")).click()
-    driver.findElement(By.cssSelector("#B-15")).click()
-    driver.findElement(By.cssSelector("#B-16")).click()
     driver.findElement(By.cssSelector("#B-17")).click()
-    driver.findElement(By.cssSelector("#B-18")).click()
     driver.findElement(By.cssSelector("#bo-navi2>a")).click()
 
     println("Press ctrl + d to Exit.")
